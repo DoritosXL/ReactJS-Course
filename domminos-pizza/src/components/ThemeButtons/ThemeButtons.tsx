@@ -1,9 +1,8 @@
-import type { Dispatch, SetStateAction } from "react";
 import type { Theme } from "../../models/theme";
 import { GenericButton } from "./Button";
 
 type ThemeButtonsProps = {
-  setTheme: Dispatch<SetStateAction<Theme>>;
+  setTheme: (theme: Theme) => void;
 }
 export const ThemeButtons = ({ setTheme }: ThemeButtonsProps) => {
   const handleToggleThemeDark = () => setTheme('dark')

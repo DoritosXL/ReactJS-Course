@@ -1,15 +1,28 @@
-import { type Dispatch, type SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { ConcreteTheme, Theme } from '../models/theme';
 
 const getSystemTheme = (): ConcreteTheme => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 
-export const useTheme = (): { theme: Theme; setTheme: Dispatch<SetStateAction<Theme>> } => {
-  const [theme, setTheme] = useState<Theme>('system');
+const THEME_KEY = 'theme';
+
+export const useTheme = (): { theme: Theme; setTheme: (theme: Theme) => void } => {
+  const [theme, setThemeState] = useState<Theme>(() => {
+    const storedTheme = localStorage.getItem(THEME_KEY) as Theme | null;
+    return storedTheme ?? 'system';
+  });
   const [effectiveTheme, setEffectiveTheme] = useState<ConcreteTheme>(getSystemTheme());
 
-  useEffect(() => {    
+  const setTheme = (newTheme: Theme) => {
+    if (newTheme === 'system') {
+      localStorage.removeItem(THEME_KEY);
+    } else {
+      localStorage.setItem(THEME_KEY, newTheme);
+    }
+    setThemeState(newTheme);
+  };
+
+  useEffect(() => {
     if (theme !== 'system') {
-      console.log('trigger effective theme')
       setEffectiveTheme(theme);
       return;
     }
