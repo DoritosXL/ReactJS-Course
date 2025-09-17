@@ -3,6 +3,7 @@ import { NavBar } from './components/NavBar/NavBar'
 import { PizzaList } from './components/PizzaList/PizzaList'
 import { useTheme } from './hooks/useTheme'
 import type { Pizza } from './models/pizza'
+import { ThemeButtons } from './components/ThemeButtons/ThemeButtons'
 
 const pizzas: Pizza[] = [
   {
@@ -32,24 +33,16 @@ const pizzas: Pizza[] = [
   },
 ];
 
+
+
 function App() {
   const [chosenPizzas, setChosenPizzas] = useState<Pizza[]>(pizzas)
   const { setTheme } = useTheme();
 
-  const handleToggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
-  }
-
   return (
     <div className="bg-white dark:bg-gray-900 p-4 min-h-screen">
       <NavBar chosenPizzas={chosenPizzas} setChosenPizzas={setChosenPizzas}>
-        <button
-          onClick={handleToggleTheme}
-          className="ml-4 p-2 text-xl transition-colors hover:cursor-pointer"
-          title="Toggle theme"
-        >
-          🌓
-        </button>
+        <ThemeButtons setTheme={setTheme} />
       </NavBar>
 
       <PizzaList chosenPizzas={chosenPizzas} setChosenPizzas={setChosenPizzas} />

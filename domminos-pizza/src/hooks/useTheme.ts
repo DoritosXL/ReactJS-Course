@@ -1,19 +1,40 @@
 import { type Dispatch, type SetStateAction, useEffect, useState } from 'react';
-import type { Theme } from '../models/theme';
+import type { ConcreteTheme, Theme } from '../models/theme';
 
-const getSystemTheme = (): Theme => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+const getSystemTheme = (): ConcreteTheme => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 
 export const useTheme = (): { theme: Theme; setTheme: Dispatch<SetStateAction<Theme>> } => {
-  const [theme, setTheme] = useState<Theme>(getSystemTheme());
+  const [theme, setTheme] = useState<Theme>('system');
+  const [effectiveTheme, setEffectiveTheme] = useState<ConcreteTheme>(getSystemTheme());
+
+  useEffect(() => {    
+    if (theme !== 'system') {
+      console.log('trigger effective theme')
+      setEffectiveTheme(theme);
+      return;
+    }
+
+    setEffectiveTheme(getSystemTheme());
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = () => {
+      setEffectiveTheme(getSystemTheme());
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
+  }, [theme]);
 
   useEffect(() => {
     const root = document.documentElement;
-    if (theme === 'dark') {
+    if (effectiveTheme === 'dark') {
       root.classList.add('dark');
     } else {
       root.classList.remove('dark');
     }
-  }, [theme]);
+  }, [effectiveTheme]);
 
   return { theme, setTheme };
 };
