@@ -1,0 +1,73 @@
+Notes for the course
+
+Day 1
+- Introductions
+
+- Agenda
+  - We will be skipping testing
+  - It will be graphql as a backend
+
+- Vite
+  - Talk about how vite changes main.tsx which is referenced in the script in index.html to a transpiled javascript file during render
+  - Vite helps us dealing with non relative imports (say you import something from the node modules)
+  - Vite makes it so that during development you change something like a variable, instead of reloading the whole page (and changing the state), it will hot swap only the changed part. This is done through the react() plugin defined in the defineConfig within vite.config.ts
+  - Vite is only the dev server
+
+- JSX
+  - how it's transpiled to javascript
+  - Some explanation about exports and default export (pref goes to named exports)
+
+- Labs
+  - Doing the excercises right now. Things I hadn't heard of before:
+    - React automatically prevents XSS attacks by not allowig Adding `const header = '<h1>Header<h1/>' `. If the user wants to they can explcitily add _dangerouslyhtml 
+    - StrictMode make everything render twice for debugging/troubleshooting purposes
+    - 
+
+
+Day 2
+- Test time
+  - Explain what v = fn(s) means in the context of React
+      Answer: View is a function of state
+  - Which of the following statements are false and why?
+      Answer: C is wrong, because React code itelf is JSX. It needs to transpile into javascript
+  - Fill out the table below with ✅ checks for the tools that enforce the desired rules:
+      Answer: Drew this in the pdf file. *note: If it's tpyescript related it's tsconfig. If it's opinions (=== instead of ==) it's probably eslint. And if it's formatting it's prettier
+  - What are the differences between Html in .tsx files vs .html files? Name at least 2
+      Answer: You can insert javascript into the html for .tsx files (dynamic expressions) & class -> className
+  - Will the following code result in a type error? If yes, change the code to fix the error
+      Answer: The ListItemProps is missing the name property
+  - What are the children of a react component?
+      Answer: Whatever is within the component brackets <>{children}</>. This is commonly a ReactNode
+  - What are the different ways to style a react component
+      Answer: Styled components, tailwindcss and inline
+  - Let's play is it a tailwind class. If so whaat does it do?
+      Answers:
+        tailwind, makes the background blue-500
+        tailwind, makes the text color white
+        tailwind, makes the padding top and bottom 4 (I think that is 1 or 1.5 rem)
+        tailwind, makes the border rounded
+        tailwind, makes the background blue-700 on hover
+        css, applies a specific font style
+        tailwind, applies flex starting medium sized screens
+        tailwind I think? Haven't heard of qr:mo before
+  - The following code doesn't work as expected. What is the issue and how woould you fix it?
+      Answer: In React you can use the useState hook to maintain the state of count and increment it with setCount 
+  - A colleague puts up a PR with the following code. What would you suggest to improve the code?
+      Answer: Don't forget to remove the even listener by returning () => removeEventListener. Add an onClick to the Dialog to stop propogation (that's an html action)
+  - What statements about shadcn/UI are true?
+      Answer: A, B
+
+- Notes:
+  - When working with eventListeners (addEventListener & removeEventListener you'll need to seperate the actual listener method to a separate const so the remove knows what to abort from the add.) You can also create a new AbortController which can abort everything
+  - With React Router you have 3 modes
+    Framework mode (server side)
+    Data mode (declare your createbrowserRouter)
+    Declarative mode is more reactivied
+  - Some explanation about providers. When using React Router it requires a browserProvider.    
+  - Link, NavLink (to pass styling to the className on active) and useNavigate to dynamically navigate in your component
+  - fetch edge cases: error handling, loading, caching, deduping requests, aborting, refetching, pagination, and then some
+  - With queries using urql you get suspense automatically set to true. But There is another ErrorBoundary that can be used and needs to be seperately importen from 'react-error-boundary'
+  - How Suspense works is that it waits untill ALL promises are resolved. All promised called with `use` that should return a promise
+  - Implementing urql and adding codegen was pretty cool  
+  - you can apply pseudo classes to tailwind regarding forms. Example: (user-invalid:border-red-500)
+  - 

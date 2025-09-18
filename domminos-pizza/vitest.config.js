@@ -1,12 +1,12 @@
-import { defineConfig } from 'vitest/config';
-  export default defineConfig({
+import { defineConfig } from 'vitest/config'
+export default defineConfig({
     test: {
-    globals: true,
-    setupFiles: ['src/test-setup.ts'],
-    browser: {
-    enabled: true,
-    provider: 'playwright',
-    instances: [{ browser: 'chromium' }],
+        globals: true,
+        setupFiles: ['src/test-setup.ts'],
+        browser: {
+            enabled: true,
+            provider: 'playwright',
+            instances: [{ browser: 'chromium' }],
+        },
     },
-  },
-});
+})
