@@ -1,5 +1,6 @@
+import type { Pizza } from "@/gql/graphql";
 import type { ReactNode } from "react";
-import type { Pizza } from "../../models/pizza"
+import { NavLink } from "react-router";
 
 type NavBarProps = {
   chosenPizzas: Pizza[];
@@ -21,7 +22,14 @@ export const NavBar = ({ chosenPizzas, setChosenPizzas, children }: NavBarProps)
         {children}
         <ul className="flex items-center mx-auto">
           <li className="flex space-x-6 font-semibold text-gray-700 dark:text-gray-200 text-lg">
-            <span className="hover:text-red-500 dark:hover:text-red-400 cursor-pointer">Home</span>
+            <NavLink to="/" className={({ isActive }) => isActive ? "text-grey-900 cursor-default border-b-2 border-blue-500" : "hover:text-red-500 dark:hover:text-red-400 cursor-pointer"}>
+              Home
+            </NavLink>
+            <NavLink to="/about" className={({ isActive }) => isActive ? "text-grey-900 cursor-default border-b-2 border-blue-500" : "hover:text-red-500 dark:hover:text-red-400 cursor-pointer"}>
+              Home
+              About
+            </NavLink>
+
           </li>
         </ul>
         <div className="relative ml-auto text-gray-700 dark:text-gray-200">

@@ -1,8 +1,9 @@
-import type { Pizza as PizzaType } from "../../../models/pizza";
+import type { Pizza } from "@/gql/graphql";
+import { NavLink } from "react-router";
 
-export const Pizza = ({ name, description, price, pictureUrl }: PizzaType) => {
+export const PizzaItem = ({ name, description, price, pictureUrl, id }: Pizza) => {
   return (
-    <div className="flex flex-col items-center shadow-md hover:shadow-lg m-2 p-4 border border-gray-200 dark:border-gray-700 rounded-lg h-full dark:bg-gray-800">
+    <div className="flex flex-col items-center dark:bg-gray-800 shadow-md hover:shadow-lg m-2 p-4 border border-gray-200 dark:border-gray-700 rounded-lg h-full">
       <img
         src={pictureUrl}
         width={100}
@@ -19,7 +20,10 @@ export const Pizza = ({ name, description, price, pictureUrl }: PizzaType) => {
       <p className="font-bold text-red-500 text-lg">
         $ {price}
       </p>
-
-    </div>
+      <NavLink className="bg-blue-500 hover:bg-blue-600 mt-auto px-4 py-2 rounded text-white transition-colors"
+        to={`/pizza/${id}`}>
+        details
+      </NavLink>
+    </div >
   )
 }
