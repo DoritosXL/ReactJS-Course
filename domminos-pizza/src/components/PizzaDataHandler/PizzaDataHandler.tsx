@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import { Route, Routes } from 'react-router';
 import { useTheme } from '../../hooks/useTheme';
 import { About } from '../About/About';
@@ -10,6 +9,7 @@ import { OrderPage } from '../OrderPage/OrderPage';
 import type { OrderDetails } from '@/models/order-details';
 import { useAddOrderMutation } from '../../Mutations/add-order';
 import { useChosenPizzas, useChosenPizzasDispatch } from '../Store/chosen-pizzas';
+import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 
 export const PizzaDataHandler = () => {
   const { setTheme } = useTheme();
@@ -49,7 +49,7 @@ export const PizzaDataHandler = () => {
         <Route path="pizza/:pid" element={<PizzaPage />} />
         <Route
           path="order"
-          element={<OrderPage handleOrderSubmit={handleOrderSubmit} />}
+          element={<ProtectedRoute><OrderPage handleOrderSubmit={handleOrderSubmit} /></ProtectedRoute>}
         />
         <Route path="about" element={<About />} />
         <Route path="*" element={<FourOhFour />} />

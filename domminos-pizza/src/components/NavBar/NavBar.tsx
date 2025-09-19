@@ -1,6 +1,9 @@
-import type { ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import { NavLink } from 'react-router'
 import { useChosenPizzas, useChosenPizzasDispatch } from '../Store/chosen-pizzas'
+import { Button } from '../ui/button'
+import { useAppDispatch, useAppSelector } from '../Store'
+import { login, logout } from '../Store/auth'
 
 type NavBarProps = {
   children: ReactNode
@@ -9,11 +12,21 @@ type NavBarProps = {
 export const NavBar = ({ children }: NavBarProps) => {
   const chosenPizzas = useChosenPizzas()
   const dispatch = useChosenPizzasDispatch()
+  const reduxDispatch = useAppDispatch()
+  const { user } = useAppSelector((state) => state.auth)
   const totalPrice = chosenPizzas.reduce((sum, pizza) => sum + pizza.price, 0)
   const totalAmount = chosenPizzas.length
 
   const handleClearCart = () => {
     dispatch({ type: 'clear' })
+  }
+
+  function handleLogout() {
+    reduxDispatch(logout())
+  }
+
+  function handleLogin() {
+    reduxDispatch(login({ id: '1', name: 'User' }))
   }
 
   return (
@@ -66,6 +79,18 @@ export const NavBar = ({ children }: NavBarProps) => {
               Clear cart
             </button>
           </span>
+        </div>
+        <div>
+          {user ? (
+            <div className="flex items-center space-x-2">
+              <span className="text-gray-700 dark:text-gray-300">
+                Welcome, {user.name}
+              </span>
+              <Button onClick={handleLogout}>Logout</Button>
+            </div>
+          ) : (
+            <Button onClick={handleLogin}>Login</Button>
+          )}
         </div>
       </nav>
     </>
