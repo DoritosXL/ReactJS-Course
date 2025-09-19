@@ -29,6 +29,7 @@ export const PizzaDataHandler = () => {
       if (result.data) {
         console.log('done with order', result.data);
       }
+      setChosenPizzas([]);
     });
   }
 
@@ -44,8 +45,7 @@ export const PizzaDataHandler = () => {
           />
         }
       >
-        <Route
-          index
+        <Route index
           element={
             <Home
               chosenPizzas={chosenPizzas}

@@ -9,6 +9,7 @@ export function OrderForm({ handleOrderSubmit }: { handleOrderSubmit: (details: 
   const onOrderSubmit = (order: OrderDetails) => handleOrderSubmit(order);
 
   const form = useForm<OrderDetails>({
+    mode: "onChange",
     resolver: zodResolver(OrderDetails),
     defaultValues: {
       address: '',

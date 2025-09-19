@@ -71,3 +71,30 @@ Day 2
   - Implementing urql and adding codegen was pretty cool  
   - you can apply pseudo classes to tailwind regarding forms. Example: (user-invalid:border-red-500)
   - 
+
+Day 3
+  - Test time
+    - Can you find problems in this routing logic?
+      - Answer: The productId should be id. the route should with id should be `:id` not `{id}`. anker instead of link.
+    - What is the difference between routing in a Multi-Page Application (MPA) and a Single-Page Application (SPA)?
+      - Answer: 
+        Single page application renders everything on one page. Commonly client side. 
+        multi-page application renders multiple different pages with each their own data fetching/logic/setup. This is commonly done server side
+    - Can you find problems in this urql setup?
+      - Answers: 
+          the mutation is missing a name
+          id is of type ID in the mutation input parameter but in the interface id is a string
+          Title is required in the mutation but not provided in the Todo component. But I might be wrong here and we're simply getting the title back from the mutation
+    - Why isn't the suspense boundary triggered in this code? What can you do to fix it?
+      - Answer: There is no query done it's all within the useState. If you change the FlipCoin method and we do the logic in the backend and fetch the result then suspense should work. Basically a promise should happen
+    - What is the difference between controlled and uncontrolled forms in React?
+      - Answer: uncontrolled means there is no state react manages. controlled means react contains the state of the form.
+    - The following input element isn't working properly. What is the problem and how can you fix it?
+      - Answer: Because the value of the input is name, which is an immutable value. passing a method and calling setName should fix it.
+    - What is the purpose of the defaultValue attribute in an <input /> React DOM element?
+      - Answer: It's the default value which can be updated uncontrolled      
+    - Change the following form so an error message is only shown when the input is changed by the user.
+      - Answer: Add onChange to the useForm
+
+
+      
