@@ -21,8 +21,13 @@ const ordersQuery = gql`
     }
 `
 export const useOrdersQuery = () => {
-    const [result] = useQuery<Query['orders']>({
+    const [result, executeQuery] = useQuery<{ orders: Query['orders'] }>({
         query: ordersQuery,
     })
-    return { orders: result.data }
+
+    const refetch = () => {
+        executeQuery({ requestPolicy: 'network-only' })
+    }
+
+    return { orders: result.data?.orders, refetch, fetching: result.fetching }
 }

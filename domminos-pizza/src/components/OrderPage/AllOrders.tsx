@@ -1,6 +1,7 @@
-import { useOrdersQuery } from "@/Queries/query-orders";
+// import { useOrdersQuery } from "@/Queries/query-orders";
+import { useAppSelector } from "../Store";
 
 export const AllOrders = () => {
-  const { orders } = useOrdersQuery();
+  const orders = useAppSelector((state) => state.order);
   return <pre className="dark:text-white">{JSON.stringify(orders, null, 2)}</pre>;
-}
+};

@@ -1,10 +1,12 @@
 import { useDispatch, useSelector, useStore } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { authSlice } from './auth';
+import { orderSlice } from './order';
 
 export const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
+    order: orderSlice.reducer,
   },
 });
 

@@ -98,5 +98,11 @@ Day 3
 
 
 - Notes
-  - context essentially is prop drilling with less steps. you don't have to prop drill but as long as your component is a child of the initial place where that attribute is defined you can use it   
-  
+  - Context essentially is prop drilling with less steps. you don't have to prop drill but as long as your component is a child of the initial place where that attribute is defined you can use it   
+  - UseCallback is made to cache functions to prevent re renders in memoized components
+  - To help with performance use memo and callback as much as possible
+  - React Compiler does this for you! With vite you can add it as a plugin vitejs/plugin-react -> babel->plugins->babel-plugin-react-Compiler  
+  - React scan is a handy script which displays what is being re-rendered for performance investigation (dev)
+  - Storybook now supports PLAY. allowing testing in storybook. It's using testing library under the hood
+  - Service worker is a script that your browser runs in the background. it can intercept, modify or invent network repsonses
+  - 

@@ -1,4 +1,7 @@
+import type { Order, OrderDetails } from '@/gql/graphql'
 import { gql, useMutation } from 'urql'
+// import type { Order } from '@/models/order'
+// import type { OrderDetails } from '@/models/order-details'
 
 const addOrderMutation = gql(`
     mutation addOrderMutation (
@@ -30,7 +33,19 @@ const addOrderMutation = gql(`
         }
     }
 `)
+
+interface AddOrderMutationData {
+    addOrder: Order
+}
+
+interface AddOrderMutationVariables extends OrderDetails {
+    pizzaIds: string[]
+}
+
 export const useAddOrderMutation = () => {
-    const [, executeMutation] = useMutation(addOrderMutation)
+    const [, executeMutation] = useMutation<
+        AddOrderMutationData,
+        AddOrderMutationVariables
+    >(addOrderMutation)
     return { addOrder: executeMutation }
 }

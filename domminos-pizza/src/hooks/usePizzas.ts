@@ -2,7 +2,7 @@ import type { Pizza } from '@/gql/graphql'
 import { gql, useQuery } from 'urql'
 
 const PIZZAS_QUERY = gql`
-    query GetPizzas {
+    query getPizzas {
         pizzas {
             id
             name
