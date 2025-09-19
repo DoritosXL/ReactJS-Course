@@ -1,8 +1,5 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import type { Pizza } from '@/gql/graphql';
-import { useState } from 'react';
 import { Route, Routes } from 'react-router';
-import { usePizzas } from '../../hooks/usePizzas';
 import { useTheme } from '../../hooks/useTheme';
 import { About } from '../About/About';
 import { FourOhFour } from '../FourOhFour/FourOhFour';
@@ -12,11 +9,12 @@ import { SharedLayout } from '../SharedLayout/SharedLayout';
 import { OrderPage } from '../OrderPage/OrderPage';
 import type { OrderDetails } from '@/models/order-details';
 import { useAddOrderMutation } from '../../Mutations/add-order';
+import { useChosenPizzas, useChosenPizzasDispatch } from '../Store/chosen-pizzas';
 
 export const PizzaDataHandler = () => {
   const { setTheme } = useTheme();
-  const pizzas = usePizzas();
-  const [chosenPizzas, setChosenPizzas] = useState<Pizza[]>(pizzas.data?.pizzas || []);
+  const chosenPizzas = useChosenPizzas();
+  const dispatch = useChosenPizzasDispatch();
   const { addOrder } = useAddOrderMutation();
 
   async function handleOrderSubmit(details: OrderDetails) {
@@ -29,7 +27,7 @@ export const PizzaDataHandler = () => {
       if (result.data) {
         console.log('done with order', result.data);
       }
-      setChosenPizzas([]);
+      dispatch({ type: 'clear' });
     });
   }
 
@@ -39,18 +37,13 @@ export const PizzaDataHandler = () => {
         path="/"
         element={
           <SharedLayout
-            chosenPizzas={chosenPizzas}
-            setChosenPizzas={setChosenPizzas}
             setTheme={setTheme}
           />
         }
       >
         <Route index
           element={
-            <Home
-              chosenPizzas={chosenPizzas}
-              setChosenPizzas={setChosenPizzas}
-            />
+            <Home />
           }
         />
         <Route path="pizza/:pid" element={<PizzaPage />} />

@@ -97,4 +97,6 @@ Day 3
       - Answer: Add onChange to the useForm
 
 
-      
+- Notes
+  - context essentially is prop drilling with less steps. you don't have to prop drill but as long as your component is a child of the initial place where that attribute is defined you can use it   
+  

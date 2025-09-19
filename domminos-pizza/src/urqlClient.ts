@@ -1,4 +1,3 @@
-// import type { Provider, ReactNode } from "react";
 import { Client, cacheExchange, fetchExchange } from 'urql'
 
 export const client = new Client({
@@ -11,11 +10,3 @@ export const client = new Client({
     },
     suspense: true,
 })
-
-// export function UrqlProvider({client, children}: {client: Client, children: ReactNode}) => {
-//   return
-//     <Provider value={client}>
-//       {children}
-//     </Provider>
-
-// }

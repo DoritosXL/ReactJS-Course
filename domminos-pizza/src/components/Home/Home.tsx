@@ -1,18 +1,9 @@
-import type { Pizza } from '@/gql/graphql'
 import { PizzaList } from '../PizzaList/PizzaList'
 
-type HomeProps = {
-  chosenPizzas: Pizza[]
-  setChosenPizzas: (pizzas: Pizza[]) => void
-}
-
-export const Home = ({ chosenPizzas, setChosenPizzas }: HomeProps) => {
+export const Home = () => {
   return (
     <div>
-      <PizzaList
-        chosenPizzas={chosenPizzas}
-        setChosenPizzas={setChosenPizzas}
-      />
+      <PizzaList />
     </div>
   )
 }

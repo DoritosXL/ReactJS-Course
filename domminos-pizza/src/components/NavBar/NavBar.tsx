@@ -1,23 +1,19 @@
-import type { Pizza } from '@/gql/graphql'
 import type { ReactNode } from 'react'
 import { NavLink } from 'react-router'
+import { useChosenPizzas, useChosenPizzasDispatch } from '../Store/chosen-pizzas'
 
 type NavBarProps = {
-  chosenPizzas: Pizza[]
-  setChosenPizzas: (pizzas: Pizza[]) => void
   children: ReactNode
 }
 
-export const NavBar = ({
-  chosenPizzas,
-  setChosenPizzas,
-  children,
-}: NavBarProps) => {
+export const NavBar = ({ children }: NavBarProps) => {
+  const chosenPizzas = useChosenPizzas()
+  const dispatch = useChosenPizzasDispatch()
   const totalPrice = chosenPizzas.reduce((sum, pizza) => sum + pizza.price, 0)
   const totalAmount = chosenPizzas.length
 
   const handleClearCart = () => {
-    setChosenPizzas([])
+    dispatch({ type: 'clear' })
   }
 
   return (

@@ -5,13 +5,16 @@ import { Provider } from 'urql'
 import App from './App.tsx'
 import './index.css'
 import { client } from './urqlClient.ts'
+import { ChosenPizzaProvider } from './components/Store/chosen-pizzas.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider value={client}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <ChosenPizzaProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ChosenPizzaProvider>
     </Provider>
   </StrictMode>
 )
